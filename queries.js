@@ -1,3 +1,5 @@
+
+//PostgreSQL connection
 const Pool = require('pg').Pool
 const pool = new Pool({
   user: 'postgres',
@@ -8,7 +10,7 @@ const pool = new Pool({
 })
 
 
-
+//select users
 const getUsers = (request, response) => {
   pool.query('SELECT * FROM users ORDER BY id ASC', (error, results) => {
     if (error) {
@@ -20,7 +22,7 @@ const getUsers = (request, response) => {
 
 
 
-
+//get single user by id
 const getUserById = (request, response) => {
   const id = parseInt(request.params.id)
 
@@ -33,6 +35,7 @@ const getUserById = (request, response) => {
 }
 
 
+//POST  adding new user
 
 const createUser = (request, response) => {
   const { name, email } = request.body
@@ -47,7 +50,7 @@ const createUser = (request, response) => {
 
 
 
-
+//PUT updated data in an existing user
 const updateUser = (request, response) => {
   const id = parseInt(request.params.id)
   const { name, email } = request.body
@@ -79,7 +82,7 @@ const deleteUser = (request, response) => {
 }
 
 
-
+//to access these functions from index.js we ll need to export them
 module.exports = {
   getUsers,
   getUserById,
